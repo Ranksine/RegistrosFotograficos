@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<head>
+  <title>Busqueda</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <div>
+        Registro Fotográfico de Elementos por Corporación
+    </div>
+    <form method="post" id="formularioBusqueda">
+        {% csrf_token %}
+        <div>
+            {{formBusqueda.descripcion.label_tag}}
+            {{formBusqueda.descripcion}}
+
+            {{formBusqueda.clave.label_tag}}
+            {{formBusqueda.clave}}
+        </div>
+        <div>
+            {{formBusqueda.status_real.label_tag}}
+            {{formBusqueda.status_real}}
+        </div>
+        <div>
+            {{formBusqueda.f_ing_depen.label_tag}}
+            {{formBusqueda.f_ing_depen}}
+        </div>
+        <div>
+                <button type="button" id="btnBuscar" onclick="buscarCorp()" disabled>BUSCAR</button>
+        </div>
+    </form>
+
+    <script>
+        const claveCorp = document.getElementById('clave_corp');
+        const statusReal = document.getElementById('status_real');
+        const fechaLimite = document.getElementById('fecha_limite');
+        const btnBuscar = document.getElementById('btnBuscar');
+
+        // Función para validar los elementos
+        function validarElementos() {
+            // Validación de clave_corp: Debe ser un número positivo
+            const claveCorpValida = claveCorp.value > 0;
+
+            // Validación de status_real: Puede tener cualquier valor (marcado o no)
+
+            // Validación de fecha_limite: Debe tener un valor (fecha seleccionada)
+            const fechaLimiteValida = fechaLimite.value !== '';
+            console.log('Clave Corp: ' + claveCorpValida)
+            console.log('Fecha: ' + fechaLimiteValida)
+            // Habilitar el botón solo si clave_corp y fecha_limite son válidos
+            btnBuscar.disabled = !(claveCorpValida && fechaLimiteValida);
+            if (fechaLimiteValida === true && claveCorpValida === true)
+                console.log('Elementos Correctos')
+            else
+                console.log('Elementos nulos')
+        }
+
+        // Ejecutar la validación al cargar la página y cada vez que cambie el valor de un campo
+        validarElementos();
+        claveCorp.addEventListener('input', validarElementos);
+        statusReal.addEventListener('change', validarElementos);
+        fechaLimite.addEventListener('change', validarElementos);
+        
+        function buscarCorp(){
+            clave = document.getElementById('clave_corp').value;
+            activo = document.getElementById('status_real').checked;
+            fecha = document.getElementById('fecha_limite').value;
+
+            alert('Datos a Buscar: \nCalve: ' + clave + '\nEstado: ' + activo + '\nFecha límite: ' + fecha);
+            document.getElementById('formularioBusqueda').submit();
+        }
+    </script>
+
+</body>

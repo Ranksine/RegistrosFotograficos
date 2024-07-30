@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<head>
+  <title>Busqueda</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    {% csrf_token %}
+        Bienvenido a la consulta de las personas activas en una corporacion
+        <form method="POST">
+            <div>
+                clave
+                {{clave_corp}}
+            </div>
+            <div>
+                Estado:
+                {% if status_real == 1 %}
+                    <span> Activo </span>
+                {% else %}
+                    <span> Inactivo </span>
+                {% endif %}
+            </div>
+            <div>
+                Fecha limite
+                {{fecha}}
+            </div>
+            <div>
+                Ruta de la carpeta: {{directorio}}
+            </div>
+            <div>
+                Total de registros encontrados en la base de datos: {{total_consulta}}
+            </div>
+            <div>
+                {% if total_fotos != -1 %}
+                    Total de fotografías generadas: {{total_fotos}}
+                {% else %}
+                    No se generó ninguna imagen 
+                {% endif %}
+            </div>
+        </form>
+        <a href="{% url 'index'%}"><button type="button">Volver al inicio</button></a>
+    </body>
+</html>
