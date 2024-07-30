@@ -1,5 +1,5 @@
 # RegistrosFotograficos
- Proyecto Django que interpreta archivos binarios en imagenes
+ Proyecto Django que interpreta archivos binarios en imagenes recuperadas de la DB
 
 # -- Development Path --
  1. Conexión a DB correctamente.
